@@ -1,0 +1,224 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color: #D9D9D9;
+    font-size: small;
+}
+/* Fuentes */
+@font-face{
+    font-family: "Ubuntu";
+    src: url('../Fuentes/Ubuntu/Ubuntu-Medium.ttf') format('truetype');}
+
+@font-face{
+    font-family: "Ubuntu_Bold";
+    src: url('../Fuentes/Ubuntu/Ubuntu-Bold.ttf') format('truetype');}
+
+@font-face{
+    font-family: "Open_Sans";
+    src: url('../Fuentes/Open_Sans/static/OpenSans/OpenSans-Medium.ttf') format('truetype');}
+
+@font-face{
+    font-family: "Open_Sans_SemiBold";
+    src: url('../Fuentes/Open_Sans/static/OpenSans/OpenSans-SemiBold.ttf') format('truetype');}
+    
+@font-face{
+    font-family: "Open_Sans_Bold";
+    src: url('../Fuentes/Open_Sans/static/OpenSans/OpenSans-Bold.ttf') format('truetype');}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url('../Fuentes/Montserrat/static/Montserrat-Medium.ttf') format('truetype');}
+
+@font-face{
+    font-family: "Montserrat_SemiBold";
+    src: url('../Fuentes/Montserrat/static/Montserrat-SemiBold.ttf') format('truetype');}
+
+    
+@font-face{
+    font-family: "Montserrat_Bold";
+    src: url('../Fuentes/Montserrat/static/Montserrat-Bold.ttf') format('truetype');}
+    
+/* Estilos Generales */
+
+.ElementoCentradoHorizontal_y_Vertical{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.divTextoCentradoVertical_y_Horizontal{
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.divTextoCentradoVerticalYHorizontal_sinFlex{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.DivConDisplayFlex{
+    display: flex;
+}
+.divConWidthAl50{
+    width: 49.2%;
+    min-width: 360px;
+}
+.DivConDisplayInlineBlock{
+    display: inline-block;
+    
+}
+
+.ElementoAlaDerecha{
+    
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    text-align: end;
+    align-items: center;
+}
+.divTextoAlaDerecha{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    text-align: end;
+    align-items: center;
+}
+
+.divContenedorVerde{
+    background-color: #13A53C;
+}
+.divContenedorAmarillo{
+    background-color: #D2C54F;
+}
+.divContenedorRojo{
+    background-color: #D61F31;
+}
+.divContenedorMorado{
+    background-color: #8E09CC;
+}
+
+
+.fill_Color_Verde{
+    fill: #13A53C;
+}
+.fill_Color_Amarillo{
+    fill: #D2C54F;
+}
+.fill_Color_Rojo{
+    fill: #D61F31;
+}
+.fill_Color_Morado{
+    fill: #8E09CC;
+}
+.fill_Color_Azul{
+    fill: #4462FF;
+}
+
+.colorGris70Transparencia{
+    color: #7f7d7db7;
+}
+
+
+.Columna_50{
+    width: 49.5%;
+}
+
+.Columna_30{
+    width: 30%;
+}
+.Columna_25{
+    width: 25%;
+}
+.Columna_20{
+    width: 20%;
+}
+
+.Columna_15{
+    width: 15%;
+}
+.Columna_10{
+    width: 10%;
+}
+.Columna_5{
+    width: 5%;
+}
+
+
+
+.Elemento_al_75Porciento{
+    width: 75%;
+}
+.Elemento_al_70Porciento{
+    width: 70%;
+}
+.Elemento_al_50Porciento{
+    width: 49.5%;
+}
+.Elemento_al_30Porciento{
+    width: 30%;
+}
+.Elemento_al_25Porciento{
+    width: 25%;
+}
+.Elemento_al_20Porciento{
+    width: 20%;
+}
+
+.Elemento_al_15Porciento{
+    width: 15%;
+}
+.OcultarElemento{
+    display: none;
+}
+.txtGrande{
+    font-size: large;
+}
+.txt_ExtraGrande{
+    font-size: x-large;
+}
+.TextUbuntu{
+    font-family: Ubuntu;
+}
+.TextOpen_Sans{
+    font-family: Open_Sans;
+}
+
+.TextMontserrat{
+    font-family: Montserrat;
+}
+
+.Text_Montserrat_SemiBold{
+    font-family: Montserrat_SemiBold;
+}
+.TextUbuntu_Bold{
+    font-family: Ubuntu_Bold;
+}
+.TextOpen_Sans_Bold{
+    font-family: Open_Sans_Bold;
+}
+
+.Text_Montserrat_Bold{
+    font-family: Montserrat_Bold;
+}
+
+
+.textoAmarillo{
+    color: #a99f41;
+}
+
+.ElementoClick{
+    cursor: pointer;
+}
+
+.textoAmarillo_Clickeable_textoLineado{
+    cursor: pointer;
+    color: #a99f41;
+    text-decoration: underline;
+}
