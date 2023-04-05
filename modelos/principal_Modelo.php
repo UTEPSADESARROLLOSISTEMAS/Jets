@@ -7,7 +7,7 @@ class principalModelo
     public static function conectarALaBaseDeDatos()
     {
 
-        $conectar = mysqli_connect("localhost", "root", "", "sistemalabutepsa");
+        $conectar = mysqli_connect("localhost", "root", "", "jets");
         if (!$conectar) {
 
             die("Conexión fallida: " . mysqli_connect_error());

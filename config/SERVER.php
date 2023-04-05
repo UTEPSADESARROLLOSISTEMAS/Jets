@@ -1,7 +1,7 @@
 <?php
 
 const SERVER = "localhost";
-const DB = "jets_bd"; //nombre de la base de datos
+const DB = "jets"; //nombre de la base de datos
 const USER = "root";
 const PASS = "";
 

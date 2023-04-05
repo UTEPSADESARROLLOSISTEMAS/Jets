@@ -59,7 +59,7 @@ class login_Modelo{
 
     public static function IniciarSesion($ConexionBD,$datos){
 
-        $contrasena = $datos['contrasena_iniciarSesion'];
+        $contrasena_ingresada = $datos['contrasena_iniciarSesion'];
         $Consulta = "SELECT verificar_inicio_sesion('$datos[nombreUsuarioEmail]') AS contrasena;";
 
 
@@ -74,37 +74,27 @@ class login_Modelo{
 
         }
         $datosExtraidos = mysqli_fetch_assoc($ejecutar);
-        $contrasena_encriptada_bd = $datosExtraidos["contrasena"];
+        $contrasena_extraida = $datosExtraidos["contrasena"];
 
-        if (password_verify($contrasena, $contrasena_encriptada_bd)) {
+
+
+        if ($contrasena_ingresada == $contrasena_extraida) {
 
             global $url;
 
-            $Consulta_extraerDatosDelUsuario = "CALL tabla_conLosDatosDelUsuarioParaIniciarSesion('$datos[nombreUsuarioEmail]');";
+            $Consulta_extraerDatosDelUsuario = "CALL INGRESAR-EL-PROCEDIMIENTO('$datos[nombreUsuarioEmail]');";
             $resultado = mysqli_query($ConexionBD, $Consulta_extraerDatosDelUsuario);
 
             if (mysqli_num_rows($resultado) > 0) {
                 $row = mysqli_fetch_assoc($resultado);
 
-                $_SESSION['CodigoDeUsuario'] = $row["CodigoDeUsuario"];
-                $_SESSION['privilegio_del_usuario'] = $row["privilegio_del_usuario"];
                 $_SESSION['nombreDeUsuario'] = $row["nombreDeUsuario"];
+                header('Location: '.$url.'Jets/Registro');
+
 
             }
 
 
-            
-            if($row["privilegio_del_usuario"] != "6" || $row["privilegio_del_usuario"] != "0"){
-
-                header('Location: '.$url.'SistemaLabUtepsa/UsoDeLaboratorio');
-
-
-            }else{
-
-                echo "<script>alert('Aun no han Confirmado Su Usuario');
-                window.location='/SistemaLabUtepsa/'</script>";
-
-            }
 
         } else {
 

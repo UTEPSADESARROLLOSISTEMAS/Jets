@@ -111,15 +111,15 @@
       <div class="login-box">
         <img src="<?php echo SERVERURL; ?>vistas/Recursos/vectores/login_user.svg" alt="Avatar">
         <h1>INICIO DE SESION</h1>
-        <form>
+        <form action="<?php echo SERVERURL; ?>controladores/login_Controlador.php">
           <label>
             <span id="username-icon"><i class="fa fa-user"></i></span>
-            <input type="text" placeholder="Usuario" name="username" required onfocus="document.getElementById('username-icon').style.color='#EB002E';" onblur="document.getElementById('username-icon').style.color='#999';">
+            <input type="text" placeholder="Usuario" name="username_Login" required onfocus="document.getElementById('username-icon').style.color='#EB002E';" onblur="document.getElementById('username-icon').style.color='#999';">
           </label>
           </label>
           <label>
             <span id="password-icon"><i class="fa fa-lock"></i></span>
-            <input type="password" placeholder="Contraseña" name="password" required onfocus="document.getElementById('password-icon').style.color='#EB002E';" onblur="document.getElementById('password-icon').style.color='#999';">
+            <input type="password" placeholder="Contraseña" name="password_Login" required onfocus="document.getElementById('password-icon').style.color='#EB002E';" onblur="document.getElementById('password-icon').style.color='#999';">
         </label>
         <input type="submit" value="Iniciar sesión">
       </form>

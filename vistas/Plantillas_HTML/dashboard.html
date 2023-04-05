@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formularios</title>
+  <link rel="stylesheet" href="dashboard-style.css">
+  <script src="dashboard-js.js"></script>
+</head>
+
+<body>
+  <div id="botones">
+    <button onclick="mostrarFormulario1()">Inscripción automática</button>
+    <button onclick="mostrarFormulario2()">Inscripción manual</button>
+    <button onclick="mostrarFormulario3()">Ver Inscripción</button>
+  </div>
+
+  <div id="automatica" style="display:none;">
+    <form>
+      <label for="nro_registro">Nro de registro:</label>
+      <div id="cargar-nro">
+        <input type="text" id="nro_registro" name="nro_registro_reg">
+        <button onclick="cargar_nro_registro()">Cargar datos</button>
+      </div>
+
+      <div id="datos-cargados">
+        <label for="nombre_completo">Nombre completo:</label>
+        <input type="text" readonly class="readonly-input" id="nombre_completo" name="nombre_completo_reg">
+        <label for="carrera">Carrera:</label>
+        <input type="text" readonly class="readonly-input" id="carrera" name="carrera_reg">
+      </div>
+
+      <label for="nro_celular">Nro de celular:</label>
+      <input type="number" id="nro_celular" name="nro_celular_reg"><br>
+
+      <label for="talla_polera">Talla de polera:</label>
+      <select id="talla_polera" name="talla_polera_reg">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select><br>
+
+      <label for="ci">C.I.:</label>
+      <input type="text" id="ci" name="ci_reg"><br>
+
+      <label for="foto">Foto:</label>
+      <input type="file" accept="image/*" capture="camera" id="foto" name="foto_reg"><br>
+
+      <input type="submit" value="Enviar">
+    </form>
+  </div>
+
+
+  <div id="manual" style="display:none;">
+    <form>
+      <label for="nombre_completo">Nombre completo:</label>
+      <input type="text" id="nombre_completo" name="nombre_completo_reg1"><br>
+
+      <label for="nro_registro">Nro de registro:</label>
+      <input type="text" id="nro_registro" name="nro_registro_reg1"><br>
+
+      <label for="carrera">Carrera:</label>
+      <select id="carrera" name="carrera_reg1">
+        <option value="Ingenieria de sistemas">Ingenieria de sistemas</option>
+        <option value="Ingenieria Comercial">Ingenieria Comercial</option>
+        <option value="Psicologia">Psicologia</option>
+      </select><br>
+
+      <label for="nro_celular">Nro de celular:</label>
+      <input type="number" id="nro_celular" name="nro_celular_reg1"><br>
+
+      <label for="talla_polera">Talla de polera:</label>
+      <select id="talla_polera" name="talla_polera_reg1">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select><br>
+
+      <label for="ci">C.I.:</label>
+      <input type="text" id="ci" name="ci_reg1"><br>
+
+      <label for="foto">Foto:</label>
+      <input type="file" accept="image/*" capture="camera" id="foto" name="foto_reg1"><br>
+
+      <input type="submit" value="Enviar">
+    </form>
+  </div>
+
+  <div id="ver-inscripcion" style="display:none;">
+    <form>
+      <label for="nro_registro">Nro de registro:</label>
+      <div id="cargar-nro">
+        <input type="text" id="nro_registro" name="nro_registro_reg2">
+        <button onclick="cargar_nro_registro()">Cargar datos</button>
+      </div>
+
+      <div id="datos-cargados">
+        <label for="nombre_completo">Nombre completo:</label>
+        <input type="text" readonly class="readonly-input" id="nombre_completo" name="nombre_completo_reg2">
+        <label for="carrera">Carrera:</label>
+        <input type="text" readonly class="readonly-input" id="carrera" name="carrera_reg2">
+      </div>
+      <div>
+        <label for="estado-inscripcion">Estado:</label>
+        <select id="estado-inscripcion" name="estado-inscripcion_reg2">
+          <option value="inscrito">Inscrito</option>
+          <option value="no-inscrito">No inscrito</option>
+        </select>
+      </div>
+      <input type="submit" value="Actualizar">
+    </form>
+  </div>
+</body>
+
+</html>

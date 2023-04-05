@@ -15,7 +15,7 @@ class principal_controlador{
         if($varsesion == null || $varsesion = ''){
 
             echo "<script>alert('SIN AUTORIZACION')</script>";
-            header('Location: '.$url.'SistemaLabUtepsa/');
+            header('Location: '.$url.'Jets/');
             die();
         }
     }
