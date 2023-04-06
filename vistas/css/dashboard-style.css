@@ -1,0 +1,208 @@
+    /* Estilos generales */
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Verdana, Tahoma, sans-serif;
+      }
+  
+      body {
+        background-color: #1D1D1B;
+        background-image: url("data:image/svg+xml,%3Csvg id='Capa_1' data-name='Capa 1' xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 40 40' fill='%23444444' fill-opacity='0.4'%3E%3Ctitle%3Efond_utepsa%3C/title%3E%3Cpath d='M26.77 18.52a.25.25 0 0 0-.12-.44l-3.06-.43s0 0 0 0l.65-3a.25.25 0 0 0-.38-.26L21.21 16s0 0-.05 0l-1.45-2.74a.25.25 0 0 0-.46 0L18.3 16.2a0 0 0 0 1-.05 0l-2.87-1.16a.24.24 0 0 0-.32.32l1.16 2.87a0 0 0 0 1 0 .05l-2.94.95a.25.25 0 0 0 0 .46L16 21.16s0 0 0 .05l-1.64 2.62a.25.25 0 0 0 .26.38l3-.65s0 0 0 0l.43 3.06a.25.25 0 0 0 .44.12l1.9-2.44s0 0 .06 0l2.29 2.07a.25.25 0 0 0 .42-.19l-.11-3.1a0 0 0 0 1 0 0l3.1.11a.25.25 0 0 0 .19-.42l-2.07-2.29s0 0 0-.06ZM24.85 22a.26.26 0 0 1 0 .29.22.22 0 0 1-.05.08.26.26 0 0 1-.2.08l-2.26-.08.08 2.26a.25.25 0 0 1-.16.25.26.26 0 0 1-.29 0l-1.68-1.52-1.39 1.79a.27.27 0 0 1-.28.09.25.25 0 0 1-.2-.22l-.31-2.24-2.21.47a.26.26 0 0 1-.28-.11.27.27 0 0 1 0-.3l1.2-1.91-2-1.06a.26.26 0 0 1-.15-.26.27.27 0 0 1 .19-.24l2.15-.69-.85-2.1a.27.27 0 0 1 .35-.35l2.1.85.69-2.15a.27.27 0 0 1 .24-.19.26.26 0 0 1 .26.15l1.06 2 1.91-1.2a.27.27 0 0 1 .3 0 .26.26 0 0 1 .11.28l-.47 2.21 2.24.31a.25.25 0 0 1 .22.2.27.27 0 0 1-.09.28l-1.79 1.39Z'/%3E%3Cpath d='M22.27 20.08a1.6 1.6 0 0 0-.44-.73l-1.95-2-.64.64 1.84 1.84a1.14 1.14 0 0 1 .38.66.87.87 0 0 1-.29.62.81.81 0 0 1-.63.3 1.09 1.09 0 0 1-.66-.37L18 19.23l-.64.64 1.94 1.94a1.52 1.52 0 0 0 1.14.5 1.79 1.79 0 0 0 1.2-.61 2.1 2.1 0 0 0 .54-.8A1.44 1.44 0 0 0 22.27 20.08Z'/%3E%3Cpath d='M6.43 2.8 4.35.5a0 0 0 0 1 0 0L5 0H3.85L3.36.35 4.87 2a.28.28 0 0 1 0 .3l-.06.08a.24.24 0 0 1-.2.07L2.4 2.4l.08 2.26a.26.26 0 0 1-.15.26.28.28 0 0 1-.3 0L.35 3.36 0 3.81V4.93l.45-.58h0L2.8 6.43a.25.25 0 0 0 .42-.2L3.1 3.14a0 0 0 0 1 0 0l3.09.12A.25.25 0 0 0 6.43 2.8Z'/%3E%3Cpath d='M2.29.11a.78.78 0 0 0 0-.14H1.17a1.07 1.07 0 0 1 .31.58.81.81 0 0 1-.29.62.86.86 0 0 1-.63.31A1 1 0 0 1 0 1.18V2.24a1.1 1.1 0 0 0 .51.09 1.82 1.82 0 0 0 1.2-.6A2.18 2.18 0 0 0 2.24.92 1.33 1.33 0 0 0 2.29.11Z'/%3E%3Cpath d='M39 5.13a.27.27 0 0 1-.29.09.26.26 0 0 1-.2-.22l-.31-2.24L36 3.24a.28.28 0 0 1-.28-.11.29.29 0 0 1 0-.31L36.88.91 35.11 0h-1.4L36 1.17a0 0 0 0 1 0 .05L34.34 3.84a.25.25 0 0 0 .27.38l3-.65a.05.05 0 0 1 0 0l.42 3.07a.25.25 0 0 0 .45.12l1.53-2V3.7Z'/%3E%3Cpath d='M39.91 1.09 38.78 0H37.51l1.86 1.86a1.65 1.65 0 0 0 .71.44v-1Z'/%3E%3Cpath d='M6.68 38.1l-3.07-.42a.05.05 0 0 1 0 0l.65-3a.25.25 0 0 0-.38-.27L1.23 36a0 0 0 0 1-.05 0L0 33.75v1.39l.92 1.74 1.91-1.2a.29.29 0 0 1 .31 0 .28.28 0 0 1 .11.28l-.48 2.21L5 38.48a.28.28 0 0 1 .23.2.29.29 0 0 1-.1.29l-1.3 1H5L6.8 38.55A.25.25 0 0 0 6.68 38.1Z'/%3E%3Cpath d='M1.85 39.37 0 37.52v1.27L1.1 39.9l.08.08H2.24A1.45 1.45 0 0 0 1.85 39.37Z'/%3E%3Cpath d='M39.72 33.23a.25.25 0 0 0-.46 0l-.95 2.94s0 0 0 0L35.4 35.07a.25.25 0 0 0-.33.33l1.17 2.87s0 0 0 0l-2.94.95a.25.25 0 0 0 0 .46l.49.26h1.4l-.25-.13a.26.26 0 0 1-.14-.26.27.27 0 0 1 .18-.24l2.15-.69-.85-2.09a.28.28 0 0 1 .36-.36l2.09.85.69-2.15a.27.27 0 0 1 .24-.18.26.26 0 0 1 .26.14l.23.43V33.91Z'/%3E%3Cpath d='M39.89 37.41l-.64.63.83.83V37.6Zm-2.48 2.47.1.1h1.27l-.73-.73Z'/%3E%3C/svg%3E");
+      }
+  
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        margin-top: 100px;
+      }
+  
+      /* Estilos de las pestañas */
+      .tabs {
+        background-image: linear-gradient(to bottom, #D3183C, #A60929);
+        border-radius: 20px 20px 0px 0px;
+      }
+  
+      .tabs label {
+        display: inline-block;
+        padding: 20px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 400ms ease-in-out;
+      }
+  
+      .tabs label:hover {
+        background: #fff;
+        color: #D3183C;
+        border-radius: 19px 19px 0px 0px;
+      }
+  
+      /* Estilos de los formularios en general */
+      .content {
+        position: relative;
+      }
+  
+      .content .form {
+        border-radius: 0px 0px 20px 20px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 600px;
+        position: absolute;
+        line-height: 1.8;
+        transition: all 600ms ease;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.90);
+        padding: 30px;
+        background: #fff;
+        padding-bottom: 40px;
+      }
+  
+      .content .form:after {
+        position: absolute;
+        content: "";
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        bottom: 100%;
+        left: 55px;
+      }
+  
+      .content #form2:after {
+        left: 175px;
+      }
+  
+      .content #form3:after {
+        left: 260px;
+      }
+  
+      #radio1,
+      #radio2,
+      #radio3 {
+        display: none;
+      }
+  
+      #radio1:checked~#form1,
+      #radio2:checked~#form2,
+      #radio3:checked~#form3 {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+      }
+  
+      /*Inputs*/
+  
+      button {
+        min-width: 120px;
+        padding: 10px;
+        margin: 10px;
+        background-color: #D3183C;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+  
+      button:hover {
+        background-color: #D3183C;
+      }
+  
+      input[type="text"],
+      input[type="tel"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+  
+      input[type="file"] {
+        margin-bottom: 20px;
+      }
+  
+      input[type="submit"] {
+        background-color: #D3183C;
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+  
+      input[type="submit"]:hover {
+  
+        background-color: #D3183C;
+      }
+  
+      /* Estilos específicos para los formularios */
+      #botones {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+  
+      #cargar-nro {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      #nro_registro {
+        height: 40px;
+      }
+  
+      #datos-cargados {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 15px;
+      }
+  
+      .readonly-input {
+        background-color: #f2f2f2;
+        color: #808080;
+      }
+  
+      /*Estilos de la foto*/
+      input[type="file"] {
+        border: none;
+        font-size: 1rem;
+        color: #333;
+        background-color: transparent;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        outline: none;
+      }
+  
+      input[type="file"]:hover,
+      input[type="file"]:focus {
+        background-color: #f7f7f7;
+      }
+  
+      input[type="file"]::-webkit-file-upload-button {
+        background-color: #D3183C;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease-in-out;
+      }
+  
+      input[type="file"]::-webkit-file-upload-button:hover {
+        background-color: #000;
+      }
+  
+      input[type="file"]::-webkit-file-upload-button:focus {
+        outline: none;
+      }
