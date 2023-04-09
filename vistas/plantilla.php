@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>JETS</title>
-    <link id="iconoEncabezado" rel="icon" href="../vistas/recursos/iconoEncabezado/icono_logoUtepsa.svg"  type="image/svg+xml">
+    <link rel="icon" type="image/svg+xml" href="<?php echo SERVERURL; ?>vistas/Recursos/vectores/Icono.svg">
 </head>
 
 <body>

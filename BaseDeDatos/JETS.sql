@@ -61,8 +61,7 @@ CREATE PROCEDURE RegistrarInscripcion(
     IN nroDeCelular_IN VARCHAR(20),
     IN tallaPolera_IN CHAR(5),
     IN urlFotoEstudiante_IN VARCHAR(1000),
-    IN id_UsuarioInscriptor_IN INT,
-    OUT mensaje VARCHAR(200))
+    IN id_UsuarioInscriptor_IN INT)
 
 BEGIN
 
@@ -75,17 +74,15 @@ CALL VerificarExistenciaPersona(nroDeRegistro_IN, @existe);
         -- Obtener codigo de persona
         SELECT id INTO id_Persona FROM PERSONA WHERE nro_registro = nro_registro;
         -- Registrar inscripcion
-        INSERT INTO Inscripcion(talla_polera,estado_inscripcion,foto_estudiante,id_persona,id_UsuarioInscriptor) values(tallaPolera_IN,TRUE,urlFotoEstudiante_IN,id_Persona,id_UsuarioInscriptor_IN);
+        INSERT INTO INSCRIPCION(talla_polera,estado_inscripcion,foto_estudiante,id_persona,id_UsuarioInscriptor) values(tallaPolera_IN,TRUE,urlFotoEstudiante_IN,id_Persona,id_UsuarioInscriptor_IN);
         UPDATE PERSONA SET carnet_identidad = carnetDeIdentidad_IN, nro_celular = nroDeCelular_IN WHERE nro_registro = nroDeRegistro_IN;
-        SET mensaje = 'Inscripción registrada correctamente.';
 
     ELSE
         -- Inscripcion Manual
         -- Registrar persona
-        INSERT INTO persona(nombreCompleto,nro_registro,carrera,facultad,carnet_identidad,nro_celular) values(nombreCompleto_IN,nroDeRegistro_IN,carrera_IN,facultad_IN,carnetDeIdentidad_IN,nroDeCelular_IN);
+        INSERT INTO PERSONA(nombreCompleto,nro_registro,carrera,facultad,carnet_identidad,nro_celular) values(nombreCompleto_IN,nroDeRegistro_IN,carrera_IN,facultad_IN,carnetDeIdentidad_IN,nroDeCelular_IN);
         -- Obtener codigo de persona
-        INSERT INTO inscripcion(talla_polera,estado_inscripcion,foto_estudiante,id_persona,id_UsuarioInscriptor) values(tallaPolera_IN,TRUE,urlFotoEstudiante_IN,LAST_INSERT_ID(),id_UsuarioInscriptor_IN);
-        SET mensaje = 'Inscripción registrada correctamente.';
+        INSERT INTO INSCRIPCION(talla_polera,estado_inscripcion,foto_estudiante,id_persona,id_UsuarioInscriptor) values(tallaPolera_IN,TRUE,urlFotoEstudiante_IN,LAST_INSERT_ID(),id_UsuarioInscriptor_IN);
     END IF;
 END //
 

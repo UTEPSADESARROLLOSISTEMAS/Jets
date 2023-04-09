@@ -6,6 +6,25 @@ require_once "../modelos/principal_Modelo.php";
 
 class Registro_Modelo {
 
+    static function extraer_Facultad($carrera){
+
+
+        if($carrera == "Ingeniería en Sistemas" or 
+        $carrera == "Ingeniería en Informática" or
+        $carrera == "Ingeniería en Electrónica" or
+        $carrera == "Ingeniería en Mecatrónica" or
+        $carrera == "Ingeniería en Mecánica" or
+        $carrera == "Ingeniería en Mecánica Automotriz" or
+        $carrera == "Ingeniería en Mecánica Industrial" or
+        $carrera == "Ingeniería en Mecánica Mecatrónica" or
+        $carrera == "Ingeniería en Mecánica Mecatrónica Industrial"){
+
+            return "Ingeniería";
+
+        }
+
+    }
+
 
     static function verificar_NroRegistro($NroDeRegistro) {
 
@@ -39,17 +58,19 @@ class Registro_Modelo {
 
     public static function Inscribir_Estudiante($datos) {
 
-        $codigoUsuarioAdmin = $_SESSION['CodigoDeUsuario'];
+        $codigoUsuarioAdmin = 1;
+        
 
         $ConexionBD = principalModelo::conectarALaBaseDeDatos();
 
         $consultaSQL = "CALL RegistrarInscripcion(
-            '$datos[nombres]',
-            '$datos[apellidos]',
+            '$datos[nombreCompleto]',
             '$datos[nro_registro]',
+            '$datos[carrera]',
+            '$datos[facultad]',
+            '$datos[ci]',
             '$datos[nro_celular]',
             '$datos[talla_polera]',
-            '$datos[ci]',
             '$datos[RutaDeLaFoto]',
             '$codigoUsuarioAdmin'
         );";
@@ -60,6 +81,7 @@ class Registro_Modelo {
             die("Error al ejecutar la consulta: " . mysqli_error($ConexionBD));
         }else{
 
+            /* Inicio de la generación del PDF Imprimir el resultado 
             //Hacer una consulta que extraiga todos los datos de la inscripcion recien registrada
             $consultaSQL = "CALL ExtraerDatosDeLaInscripcion('$datos[nro_registro]');";
             $resultado = mysqli_query($ConexionBD, $consultaSQL);
@@ -118,8 +140,7 @@ class Registro_Modelo {
 
             // Cerrar y generar el archivo PDF
             $pdf->Output('reporte_usuarios.pdf', 'I');
-
-
+            */
 
             echo "<script>alert('Se ha registrado con éxito')";
             echo "<script> window.location='/Jets/Registro'; </script>";
@@ -141,9 +162,9 @@ class Registro_Modelo {
         if (mysqli_num_rows($result) == 0) {
 
             $valores[] = array(
-                'nombreCompleto' => "N/A",
-                'nro_celular' => "N/A",
-                'carrera' => "N/A");
+                'nombreCompleto' => "INSCRIBIR DE FORMA MANUAL",
+                'nro_celular' => "INSCRIBIR DE FORMA MANUAL",
+                'carrera' => "INSCRIBIR DE FORMA MANUAL");
 
             return $valores;
 

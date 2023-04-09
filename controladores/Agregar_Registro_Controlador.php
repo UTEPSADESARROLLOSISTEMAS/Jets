@@ -6,7 +6,7 @@
 $principalModelo = new principalModelo();
 $Registro_Modelo = new Registro_Modelo();
 
-$accion = $_POST['accionDeBoton_Registrar'];
+$accion = $_POST['accion_del_form'];
 
 switch ($accion) {
     case "Registrar_De_Manera_Automatica":
@@ -16,8 +16,6 @@ switch ($accion) {
 
     if($resultado_de_verificar_NroRegistro == "Existe"){
 
-    //$nombre_completo_reg  = principalModelo::limpiar_cadena($_POST['nombre_completo_reg']);
-    //$carrera_reg          = principalModelo::limpiar_cadena($_POST['carrera_reg']);
     $nro_celular_reg        = principalModelo::limpiar_cadena($_POST['nro_celular_reg']);
     $talla_polera_reg       = principalModelo::limpiar_cadena($_POST['talla_polera_reg']);
     $ci_reg                 = principalModelo::limpiar_cadena($_POST['ci_reg']);
@@ -31,7 +29,7 @@ switch ($accion) {
     $filename = basename($_FILES['foto_reg']['name']);
 
     // Ruta completa del archivo de la imagen
-    $RutaDeLaFoto = $directory . $filename. $nro_registro_reg;
+    $RutaDeLaFoto = $directory.$nro_registro_reg;
 
     // Guardar la imagen en el servidor
     if(move_uploaded_file($file, $RutaDeLaFoto)) {
@@ -39,12 +37,12 @@ switch ($accion) {
         
       $datos = array(
         "nro_registro" => $nro_registro_reg,
-        "nombres" => "",
-        "apellidos" => "",
+        "nombreCompleto" => "",
         "carrera" => "",
+        "facultad" => "",
+        "ci" => $ci_reg,
         "nro_celular" => $nro_celular_reg,
         "talla_polera" => $talla_polera_reg,
-        "ci" => $ci_reg,
         "RutaDeLaFoto" => $RutaDeLaFoto
       );
       
@@ -66,18 +64,15 @@ switch ($accion) {
     break;
 
     case "Registrar_De_Manera_Manual":
-/*
-      $nro_registro_reg     = principalModelo::limpiar_cadena($_POST['nro_registro_reg1']);
-      $nombre_completo_reg  = principalModelo::limpiar_cadena($_POST['nombre_completo_reg1']);
-      $nombre_completo_reg  = principalModelo::limpiar_cadena($_POST['nombre_completo_reg1']);
-      $carrera_reg          = principalModelo::limpiar_cadena($_POST['carrera_reg1']);
-      $nro_celular_reg      = principalModelo::limpiar_cadena($_POST['nro_celular_reg1']);
-      $talla_polera_reg     = principalModelo::limpiar_cadena($_POST['talla_polera_reg1']);
-      $ci_reg               = principalModelo::limpiar_cadena($_POST['ci_reg1']);
 
-      */
+      $nro_registro     = principalModelo::limpiar_cadena($_POST['nro_registro_reg1']);
+      $nombre_completo  = principalModelo::limpiar_cadena($_POST['nombre_completo_reg1']);
+      $carrera          = principalModelo::limpiar_cadena($_POST['carrera_reg1']);
+      $nro_celular      = principalModelo::limpiar_cadena($_POST['nro_celular_reg1']);
+      $talla_polera     = principalModelo::limpiar_cadena($_POST['talla_polera_reg1']);
+      $ci               = principalModelo::limpiar_cadena($_POST['ci_reg1']);
 
-
+        
       $file = $_FILES['foto_reg1']['tmp_name'];
 
       // Directorio donde se guardará la imagen
@@ -87,28 +82,34 @@ switch ($accion) {
       $filename = basename($_FILES['foto_reg1']['name']);
 
       // Ruta completa del archivo de la imagen
-      $RutaDeLaFoto = $directory . $filename. $nro_registro_reg;
+      $RutaDeLaFoto = $directory . $nro_registro;
+
+
+      
 
       // Guardar la imagen en el servidor
       if(move_uploaded_file($file, $RutaDeLaFoto)) {
         echo "La imagen ha sido guardada correctamente";
-          
+
+        //Crear Funcion que extraiga la facultad De la carrera
+
         $datos = array(
           "nro_registro" => $nro_registro_reg,
-          "nombres" => "",
-          "apellidos" => "",
-          "carrera" => "",
+          "nombreCompleto" => $nombre_completo,
+          "carrera" => $carrera,
+          "facultad" => "",
+          "ci" => $ci_reg,
           "nro_celular" => $nro_celular_reg,
           "talla_polera" => $talla_polera_reg,
-          "ci" => $ci_reg,
           "RutaDeLaFoto" => $RutaDeLaFoto
         );
         
         $Registro_Modelo->Inscribir_Estudiante($datos);
+
+
       } else {
 
         echo "<script> alert('Error al guardar la imagen'); </script>";
-        echo "<script> window.location='/Jets/Registro'; </script>";
 
       }
 

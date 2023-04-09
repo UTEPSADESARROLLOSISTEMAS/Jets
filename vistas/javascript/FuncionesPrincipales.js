@@ -9,12 +9,10 @@ function recargarPagina(){
 
 function enviarPeticionAJAX() {
     var nroDeRegistro = document.getElementById("nro_registro").value;
-    console.log("HOLAMUNDO");
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var valores = JSON.parse(this.responseText);
-            console.log("HOLAMUNDO_2");
 
             console.log(valores);
 
