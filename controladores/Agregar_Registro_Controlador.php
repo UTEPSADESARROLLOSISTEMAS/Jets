@@ -94,13 +94,13 @@ switch ($accion) {
         //Crear Funcion que extraiga la facultad De la carrera
 
         $datos = array(
-          "nro_registro" => $nro_registro_reg,
+          "nro_registro" => $nro_registro,
           "nombreCompleto" => $nombre_completo,
           "carrera" => $carrera,
           "facultad" => "",
-          "ci" => $ci_reg,
-          "nro_celular" => $nro_celular_reg,
-          "talla_polera" => $talla_polera_reg,
+          "ci" => $ci,
+          "nro_celular" => $nro_celular,
+          "talla_polera" => $talla_polera,
           "RutaDeLaFoto" => $RutaDeLaFoto
         );
         

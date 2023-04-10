@@ -151,22 +151,23 @@
               <input type="text" id="nro_registro" class="form_input" name="nro_registro_reg2" placeholder=" ">
               <label for="nro_registro" class="form_label">Nro de registro:</label>
               <span class="form_line"></span>
-              <button>Cargar datos</button>
+              <button  type="button" onclick="enviarPeticionAJAX_VER()" >Cargar datos</button>
             </div>
 
             <div class="form_group" id="datos-cargados">
-              <input type="text" id="nombre_completo" class="readonly_input" name="nombre_completo_reg2" placeholder="  Nombre completo" readonly>
+              <input type="text" id="nombre_completo_VER" class="readonly_input" name="nombre_completo_reg2" placeholder="  Nombre completo" readonly>
               <span class="form_line"></span>
             </div>
 
             <div class="form_group" id="datos-cargados">
-              <input type="text" id="carrera" class="readonly_input" name="carrera_reg2" placeholder="  Carrera" readonly>
+              <input type="text" id="carrera_VER" class="readonly_input" name="carrera_reg2" placeholder="  Carrera" readonly>
               <span class="form_line"></span>
             </div>
 
             <div class="form_group">
               <label for="estado_inscripcion" class="select_label">Estado:</label>
-              <select id="estado_inscripcion" class="select_input" name="estado_inscripcion_reg">
+              <select id="estado_inscripcion_VER" class="select_input" name="estado_inscripcion_reg">
+                <option selected disabled value="Estado">Estado</option>
                 <option value="inscrito">Inscrito</option>
                 <option value="no-inscrito">No inscrito</option>
               </select>
