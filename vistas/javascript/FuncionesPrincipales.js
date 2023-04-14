@@ -19,6 +19,9 @@ function enviarPeticionAJAX() {
             document.getElementById('nombre_completo').value    = valores[0].nombreCompleto;
             document.getElementById('nro_celular').value        = valores[0].nro_celular;
             document.getElementById('carrera').value            = valores[0].carrera;
+            document.getElementById('ci').value                 = valores[0].carnet_identidad;
+            document.getElementById('email').value              = valores[0].correo;
+
         }
     };
     xhr.open('GET', urlDelSitio+'controladores/SolicitarDatosDelEstudiante.php?valor='+ nroDeRegistro, true);

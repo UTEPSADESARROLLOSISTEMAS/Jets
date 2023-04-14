@@ -1,7 +1,7 @@
 <?php
 
- require_once "../modelos/Registro_Modelo.php";
- require_once "../modelos/principal_Modelo.php";
+require_once '../modelos/Registro_Modelo.php';
+require_once '../modelos/principal_Modelo.php';
 
 $principalModelo = new principalModelo();
 $Registro_Modelo = new Registro_Modelo();
@@ -11,15 +11,22 @@ $accion = $_POST['accion_del_form'];
 switch ($accion) {
     case "Registrar_De_Manera_Automatica":
 
-    $nro_registro_reg = principalModelo::limpiar_cadena($_POST['nro_registro_reg']);
-    $resultado_de_verificar_NroRegistro = Registro_Modelo::verificar_NroRegistro($nro_registro_reg);
+    $nro_registro = principalModelo::limpiar_cadena($_POST['nro_registro_reg']);
+    $resultado_de_verificar_NroRegistro = Registro_Modelo::verificar_NroRegistro($nro_registro);
 
     if($resultado_de_verificar_NroRegistro == "Existe"){
 
-    $nro_celular_reg        = principalModelo::limpiar_cadena($_POST['nro_celular_reg']);
-    $talla_polera_reg       = principalModelo::limpiar_cadena($_POST['talla_polera_reg']);
-    $ci_reg                 = principalModelo::limpiar_cadena($_POST['ci_reg']);
 
+    //$Registro_Modelo->Verificar_si_el_estudiante_ya_se_inscribio($nro_registro);
+    $nro_celular        = principalModelo::limpiar_cadena($_POST['nro_celular_reg']);
+    $talla_polera       = principalModelo::limpiar_cadena($_POST['talla_polera_reg']);
+    $ci                 = principalModelo::limpiar_cadena($_POST['ci_reg']);
+    $correo             = principalModelo::limpiar_cadena($_POST['correo_reg']);
+    $carrera            = principalModelo::limpiar_cadena($_POST['carrera_reg']);
+
+    //Verificar de que facultad es el estudiante
+    $facultad = Registro_Modelo::extraer_Facultad($carrera);
+    
     $file = $_FILES['foto_reg']['tmp_name'];
 
     // Directorio donde se guardará la imagen
@@ -29,21 +36,22 @@ switch ($accion) {
     $filename = basename($_FILES['foto_reg']['name']);
 
     // Ruta completa del archivo de la imagen
-    $RutaDeLaFoto = $directory.$nro_registro_reg;
+    $RutaDeLaFoto = $directory.$nro_registro;
 
     // Guardar la imagen en el servidor
     if(move_uploaded_file($file, $RutaDeLaFoto)) {
-      echo "La imagen ha sido guardada correctamente";
-        
+
+      echo "La imagen ha sido guardada correctamente";  
       $datos = array(
-        "nro_registro" => $nro_registro_reg,
+        "nro_registro" => $nro_registro,
         "nombreCompleto" => "",
         "carrera" => "",
-        "facultad" => "",
-        "ci" => $ci_reg,
-        "nro_celular" => $nro_celular_reg,
-        "talla_polera" => $talla_polera_reg,
-        "RutaDeLaFoto" => $RutaDeLaFoto
+        "facultad" => $facultad,
+        "ci" => $ci,
+        "nro_celular" => $nro_celular,
+        "talla_polera" => $talla_polera,
+        "RutaDeLaFoto" => $RutaDeLaFoto,
+        "correo" => $correo
       );
       
       $Registro_Modelo->Inscribir_Estudiante($datos);
@@ -57,7 +65,7 @@ switch ($accion) {
 
     }else{
 
-      echo "<script> alert('La persona con número de registro $nro_registro_reg no existe en la base de datos. Ingresar de manera manual'); </script>";
+      echo "<script> alert('La persona con número de registro $nro_registro no existe en la base de datos. Ingresar de manera manual'); </script>";
       echo "<script> window.location='/Jets/Registro'; </script>";
     }
     
@@ -71,8 +79,15 @@ switch ($accion) {
       $nro_celular      = principalModelo::limpiar_cadena($_POST['nro_celular_reg1']);
       $talla_polera     = principalModelo::limpiar_cadena($_POST['talla_polera_reg1']);
       $ci               = principalModelo::limpiar_cadena($_POST['ci_reg1']);
+      $correo_reg       = principalModelo::limpiar_cadena($_POST['correo_reg1']);
 
-        
+      //Extraer la facultad a la que pertenece la carrera
+      $facultad = Registro_Modelo::extraer_Facultad($carrera);
+
+      //Comprobar si el estudiante no se inscribio previamente
+     // $Registro_Modelo->Verificar_si_el_estudiante_ya_se_inscribio($nro_registro);
+
+      //Extraer la imagen del input
       $file = $_FILES['foto_reg1']['tmp_name'];
 
       // Directorio donde se guardará la imagen
@@ -97,11 +112,12 @@ switch ($accion) {
           "nro_registro" => $nro_registro,
           "nombreCompleto" => $nombre_completo,
           "carrera" => $carrera,
-          "facultad" => "",
+          "facultad" => $facultad,
           "ci" => $ci,
           "nro_celular" => $nro_celular,
           "talla_polera" => $talla_polera,
-          "RutaDeLaFoto" => $RutaDeLaFoto
+          "RutaDeLaFoto" => $RutaDeLaFoto,
+          "correo" => $correo_reg
         );
         
         $Registro_Modelo->Inscribir_Estudiante($datos);

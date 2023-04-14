@@ -8,122 +8,70 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/svg+xml" href="<?php echo SERVERURL; ?>vistas/Recursos/vectores/Icono.svg">
-    <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-        background: url("<?php echo SERVERURL;?>vistas/Recursos/Imagenes/Utepsa_fondo.png");
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      .login-container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .login-box {
-        width: 300px;
-        background-color: #fff;
-        padding: 40px;
-        text-align: center;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      }
-      .login-box img {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%) translateY(-80%);
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 20px;
-        border: 3px solid #ffffff;
-      }
-      .login-box h1 {
-        font-weight: 500;
-        margin-top: 60px;
-        margin-bottom: 40px;
-        color: #EB002E;
-      }
-      .login-box input[type="text"],
-      .login-box input[type="password"] {
-        width: 70%;
-        padding: 12px 40px 12px 40px;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 20px;
-        font-size: 16px;
-        color: #555;
-        outline: none;
-      }
+    <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/login-style.css">
 
-      .login-box input[type="text"]:focus,
-      .login-box input[type="password"]:focus {
-        transition: all 0.5s ease-out;
-        border-bottom: 1px solid #EB002E;
-        outline: none;
-      }
+    </head>
+  
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img src="<?php echo SERVERURL; ?>vistas/Recursos/vectores/login_user.svg" alt="Avatar">
 
-      .login-box input[type="text"]::placeholder,
-      .login-box input[type="password"]::placeholder {
-        color: #bbb;
-      }
-
-      .login-box label {
-        display: block;
-        margin-bottom: 10px;
-        position: relative;
-      }
-      .login-box label span {
-        position: absolute;
-        left: 10px;
-        top: 30%;
-        transform: translateY(-50%);
-        font-size: 20px;
-        color: #999;
-      }
-      .login-box input[type="submit"] {
-        margin: 20px 0px 0px 0px;
-        width: 100%;
-        background-color: #EB002E;
-        color: #fff;
-        border: 1px solid #EB002E;
-        border-radius: 30px;
-        padding: 12px 20px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-      }
-      .login-box input[type="submit"]:hover {
-        background-color: transparent;
-        color: #EB002E;
-        border: 1px solid #EB002E;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="login-container">
-      <div class="login-box">
-        <img src="<?php echo SERVERURL; ?>vistas/Recursos/vectores/login_user.svg" alt="Avatar">
+      <form class="login-form" action="<?php echo SERVERURL;?>controladores/login_Controlador.php" class="form_input_login" method="POST">
         <h1>INICIO DE SESION</h1>
-        <form action="<?php echo SERVERURL; ?>controladores/login_Controlador.php">
-          <label>
-            <span id="username-icon"><i class="fa fa-user"></i></span>
-            <input type="text" placeholder="Usuario" name="username_Login" required onfocus="document.getElementById('username-icon').style.color='#EB002E';" onblur="document.getElementById('username-icon').style.color='#999';">
-          </label>
-          </label>
-          <label>
-            <span id="password-icon"><i class="fa fa-lock"></i></span>
-            <input type="password" placeholder="Contraseña" name="password_Login" required onfocus="document.getElementById('password-icon').style.color='#EB002E';" onblur="document.getElementById('password-icon').style.color='#999';">
+        <label>
+          <span id="username-icon"><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Usuario" name="username_Login" required
+            onfocus="document.getElementById('username-icon').style.color='#EB002E';"
+            onblur="document.getElementById('username-icon').style.color='#999';">
         </label>
+        <label>
+          <span id="password-icon"><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Contraseña" name="password_Login" required
+            onfocus="document.getElementById('password-icon').style.color='#EB002E';"
+            onblur="document.getElementById('password-icon').style.color='#999';">
+        </label>
+        <input type="hidden" name="accionDeBotonLogin" value="IniciarSesion" id="">
         <input type="submit" value="Iniciar sesión">
+        <p class="message">¿No estas registrado? <a href="#" id="inactive">Crea una cuenta</a></p>
       </form>
+
+      <form class="register-form"  action="<?php echo SERVERURL;?>controladores/login_Controlador.php" class="form_input_login" method="POST">
+        <h1>REGISTRAR</h1>
+        <label>
+          <span id="name-icon"><i class="fa fa-laptop"></i></span>
+          <input type="text" placeholder="Nombre completo" name="name_vna_Registrar_reg" required
+            onfocus="document.getElementById('name-icon').style.color='#EB002E';"
+            onblur="document.getElementById('name-icon').style.color='#999';">
+        </label>
+        <label>
+          <span id="user-icon"><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Usuario" name="user_vna_Registrar_reg" required
+            onfocus="document.getElementById('user-icon').style.color='#EB002E';"
+            onblur="document.getElementById('user-icon').style.color='#999';">
+        </label>
+        <label>
+          <span id="pass-icon"><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Contraseña" name="pass_vna_Registrar_reg" required
+            onfocus="document.getElementById('pass-icon').style.color='#EB002E';"
+            onblur="document.getElementById('pass-icon').style.color='#999';">
+        </label>
+        <input type="hidden" name="accionDeBotonLogin" value="Registrar" id="">
+        <input type="submit" value="Registrarse">
+        <p class="message">¿Ya estas registrado? <a href="#" id="active">Iniciar sesion</a></p>
+      </form>
+
     </div>
   </div>
+  <footer>
+    <img src="<?php echo SERVERURL; ?>vistas/Recursos/vectores/Powered_by.svg" alt="Powered_by">
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $('.message a').click(function () {
+      $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+    });
+  </script>
 </body>
+
 </html>

@@ -15,16 +15,16 @@ $accion = $_POST['accionDeBotonLogin'];
 switch ($accion) {
     case "IniciarSesion":
 
-        $nombreUsuarioEmail         = principalModelo::limpiar_cadena($_POST['username_Login']);
-        $contrasena   = principalModelo::limpiar_cadena($_POST['password_Login']);
+        $nombreUsuario      = principalModelo::limpiar_cadena($_POST['username_Login']);
+        $contrasena         = principalModelo::limpiar_cadena($_POST['password_Login']);
 
 
-        principalModelo::verificar_StringVacio_O_Nulo($nombreUsuarioEmail, "Nombre de Usuario o Email Esta Vacio");    
+        principalModelo::verificar_StringVacio_O_Nulo($nombreUsuario, "Nombre");    
         principalModelo::verificar_StringVacio_O_Nulo($contrasena, "Contraseña");
 
         
         $datos = [
-            "nombreUsuarioEmail" => $nombreUsuarioEmail,
+            "nombreUsuario" => $nombreUsuario,
             "contrasena_iniciarSesion" => $contrasena
         ];
 
@@ -37,6 +37,13 @@ switch ($accion) {
 
     case "Registrar":
 
+
+        $Nombre_Completo    = principalModelo::limpiar_cadena($_POST['name_vna_Registrar_reg']);
+        $Nombre_De_Usuario  = principalModelo::limpiar_cadena($_POST['user_vna_Registrar_reg']);
+        $contrasena         = principalModelo::limpiar_cadena($_POST['pass_vna_Registrar_reg']);
+
+        $contrasenaUsuario_Encryptada = password_hash($contrasena, PASSWORD_DEFAULT);
+        login_Modelo::Registrar_Usuario($Nombre_Completo,$Nombre_De_Usuario,$contrasenaUsuario_Encryptada);
 
         break;
 

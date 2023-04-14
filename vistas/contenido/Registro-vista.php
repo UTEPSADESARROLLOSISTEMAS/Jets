@@ -1,3 +1,11 @@
+<?php
+
+
+
+require_once "../Jets/controladores/Registro_Controlador.php";
+$Registro_Controlador = new Registro_Controlador();
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +25,6 @@
     <div class="tabs">
       <label for="radio1">Automático</label>
       <label for="radio2">Manual</label>
-      <label for="radio3">Ver</label>
     </div>
 
     <div class="content">
@@ -44,6 +51,13 @@
                 <input type="text" id="carrera" class="readonly_input" name="carrera_reg" placeholder="  Carrera" readonly>
                 <span class="form_line"></span>
               </div>
+                
+              <div class="form_group">
+                <input type="email" id="email" class="form_input" name="email_reg" placeholder=" " required>
+                <label for="email" class="form_label">E-mail:</label>
+                <span class="form_line"></span>
+              </div>
+
 
               <div class="form_group">
                 <input type="tel" pattern="[67]\d{7}" maxlength="8" id="nro_celular" class="form_input"
@@ -52,18 +66,18 @@
                 <span class="form_line"></span>
               </div>
 
+
+
               <div class="form_group">
                 <label for="talla_polera" class="select_label">Talla de polera:</label>
                 <select id="talla_polera" class="select_input" name="talla_polera_reg">
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
+                  <option disabled selected value="">Seleccionar</option>
+                  <?php $Registro_Controlador->Extraer_Datos_Para_Un_Select("Tallas de Poleras") ?>
                 </select>
               </div>
 
               <div class="form_group">
-                <input type="number" id="ci" class="form_input" name="ci_reg" placeholder="(Solo numeros)">
+                <input type="number" id="ci" class="form_input" name="ci_reg" placeholder="">
                 <label for="ci" class="form_label">C.I.:</label>
                 <span class="form_line"></span>
               </div>
@@ -105,6 +119,12 @@
                 <option value="Psicologia">Psicologia</option>
               </select>
             </div>
+            
+            <div class="form_group">
+                <input type="email" id="email" class="form_input" name="correo_reg1" placeholder=" " required>
+                <label for="email" class="form_label">E-mail:</label>
+                <span class="form_line"></span>
+            </div>
 
             <div class="form_group">
               <input type="tel" pattern="[67]\d{7}" maxlength="8" id="nro_celular" class="form_input"
@@ -116,10 +136,9 @@
             <div class="form_group">
               <label for="talla_polera" class="select_label">Talla de polera:</label>
               <select id="talla_polera" class="select_input" name="talla_polera_reg1">
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
+                <option disabled selected value="">Seleccionar</option>
+                <?php $Registro_Controlador->Extraer_Datos_Para_Un_Select("Tallas de Poleras") ?>
+
               </select>
             </div>
 

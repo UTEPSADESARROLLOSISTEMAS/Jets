@@ -7,51 +7,30 @@ $url = 'http://'.$_SERVER['HTTP_HOST'].'/';
 
 class login_Modelo{
 
-    public static function registrarUsuario($ConexionBD,$datos){
-
-        
-        $Consulta = "CALL agregar_Usuario
-        ('$datos[nombreCompletoUsuario]',
-        '$datos[correoUsuario]',
-        '$datos[nroDeTelefono]',
-        '$datos[profesion]',
-        '$datos[nombreDeUsuario]',
-        '$datos[contrasenaUsuario]');";
-
-
-
-        $ejecutar = mysqli_query($ConexionBD, $Consulta);
-
+    public static function registrar_usuario($Nombre_Completo,$Nombre_De_Usuario,$contrasenaUsuario_Encryptada){
+        //Variable que contiene la url del servidor
+        global $url;
+        //Conexion a la base de datos
+        $ConexionBD = principalModelo::conectarALaBaseDeDatos();
+        //Consulta que se ejecutara en la base de datos
+        $Consulta = "CALL registrar_usuario('$Nombre_De_Usuario','$contrasenaUsuario_Encryptada','$Nombre_Completo',@MensajeDeRegistro);";
+        //Ejecutar la consulta  
+        $resultado = mysqli_query($ConexionBD, $Consulta);
+        // Verificar si la consulta fue exitosa
+        if (!$resultado) {
+            die("Error al ejecutar la consulta: " . mysqli_error($ConexionBD));
+        }
+        //Extraer el mensaje de la base de datos
+        $resultado = mysqli_query($ConexionBD, "SELECT @MensajeDeRegistro AS mensaje");
+        //Convertir en una fila los datos del estudiante
+        $fila = mysqli_fetch_assoc($resultado);
+    
+        //Mostrar el mensaje
+        echo "<script>alert('" . $fila['mensaje'] . "');</script>";
+        //Redirigir a otra pagina
+        echo "<script>window.location='../'</script>";
        
-
-        
-        if (!$ejecutar) {
-            echo "Error en la consulta: " . mysqli_error($ConexionBD);
-            echo "<script>alert('Error al guardar los datos');</script>";
-
-        }
-
-        $valorRetorno = mysqli_fetch_array($ejecutar)[0];
-
-        if ($valorRetorno == "El Usuario ya existe") {
-
-            echo "<script>alert('El Usuario ya existe');
-            window.location='/SistemaLabUtepsa/'</script>";
-
-
-        } elseif ($valorRetorno == "El Correo ya existe") {
-
-            echo "<script>alert('El Correo ya existe');
-            window.location='/SistemaLabUtepsa/'</script>";
-
-
-        }else{
-
-            echo "<script>alert('Se ha registrado con éxito el Usuario');
-            window.location='/SistemaLabUtepsa/'</script>";
-
-        }
-        
+        //Cerrar la conexion
         mysqli_close($ConexionBD);
 
     }
@@ -59,50 +38,55 @@ class login_Modelo{
 
     public static function IniciarSesion($ConexionBD,$datos){
 
+        //extraer la contraseña ingresada
         $contrasena_ingresada = $datos['contrasena_iniciarSesion'];
-        $Consulta = "SELECT verificar_inicio_sesion('$datos[nombreUsuarioEmail]') AS contrasena;";
+        //Consulta que se ejecutara en la base de datos
+        $resultado = "CALL ExtraerDatos_Del_Usuario('$datos[nombreUsuario]');";
+        //Ejecutar la consulta
+        $datos_del_usuario = mysqli_query($ConexionBD, $resultado);
 
-
-
-        $ejecutar = mysqli_query($ConexionBD, $Consulta);
-
-
-
-        if (!$ejecutar) {
+        // Verificar si la consulta fue exitosa
+        if (!$datos_del_usuario) {
             echo "Error en la consulta: " . mysqli_error($ConexionBD);
             echo "<script>alert('Error al guardar los datos');</script>";
-
+            die("Error al ejecutar la consulta: " . mysqli_error($ConexionBD));
         }
-        $datosExtraidos = mysqli_fetch_assoc($ejecutar);
-        $contrasena_extraida = $datosExtraidos["contrasena"];
+
+        //Convertir en una fila los datos del estudiante
+        $datosExtraidos = mysqli_fetch_assoc($datos_del_usuario);
+        //extrayendo su contraseña
+        $contrasena_extraida = $datosExtraidos["contraseña"];
+
+        //Verificar si la contraseña ingresada es igual a la extraida de la base de datos
+        if (password_verify($contrasena_ingresada, $contrasena_extraida)) {
+
+            $estado_Usuario = $datosExtraidos["estado"];
 
 
+            if($estado_Usuario != "Deshabilitado"){
 
-        if ($contrasena_ingresada == $contrasena_extraida) {
+                //Extraer el codigo del usuario
 
-            global $url;
-
-            $Consulta_extraerDatosDelUsuario = "CALL INGRESAR-EL-PROCEDIMIENTO('$datos[nombreUsuarioEmail]');";
-            $resultado = mysqli_query($ConexionBD, $Consulta_extraerDatosDelUsuario);
-
-            if (mysqli_num_rows($resultado) > 0) {
-                $row = mysqli_fetch_assoc($resultado);
-
-                $_SESSION['nombreDeUsuario'] = $row["nombreDeUsuario"];
-                header('Location: '.$url.'Jets/Registro');
-
+                $_SESSION['id_usuario'] = $datosExtraidos["id"];
+                    
+                //Redirigir a otra pagina
+                echo "<script>window.location='../Registro'</script>";
+            }else{
+                echo "<script>alert('Su cuenta todavia no esta habilitada');</script>";
+                echo "<script>window.location='../'</script>";
 
             }
 
 
 
-        } else {
-
-            echo "<script>alert('Usuario o contraseña Incorrectos');
-            window.location='/SistemaLabUtepsa/'</script>";
+        }else{
+            echo "<script>alert('Contraseña incorrecta');</script>";
+            echo "<script>window.location='../'</script>";
         }
-        
+
         mysqli_close($ConexionBD);
 
     }
+
+    
 }

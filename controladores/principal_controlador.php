@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 
 
 class principal_controlador{
@@ -9,13 +10,13 @@ class principal_controlador{
     public static function ValidarUsuario(){
 
         $url = 'http://'.$_SERVER['HTTP_HOST'].'/';
-        error_reporting(0);
-        $varsesion = $_SESSION['privilegio_del_usuario'];
+        //error_reporting(0);
+        $varsesion = $_SESSION['id_usuario'];
 
         if($varsesion == null || $varsesion = ''){
 
             echo "<script>alert('SIN AUTORIZACION')</script>";
-            header('Location: '.$url.'Jets/');
+            echo "<script>window.location='../Jets/'</script>";
             die();
         }
     }
@@ -26,5 +27,8 @@ class principal_controlador{
 
         echo "<p>$nombreUsuario</p>";
     }
+
+
+
     
 }

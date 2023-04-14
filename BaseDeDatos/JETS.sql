@@ -10,6 +10,7 @@ CREATE TABLE PERSONA(
     facultad VARCHAR(100),
     carnet_identidad VARCHAR(25),
     nro_celular VARCHAR(25),
+    correo VARCHAR(255),
     PRIMARY KEY (id)
 )engine = innodb;
 
@@ -17,30 +18,34 @@ CREATE TABLE USUARIO(
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
     contraseña VARCHAR(255) NOT NULL,
+    nombreCompleto VARCHAR(50),
+    estado VARCHAR(50),
     PRIMARY KEY (id)
 )engine = innodb;
 
+
+CREATE TABLE TALLAS_POLERA(
+    id INT NOT NULL AUTO_INCREMENT,
+    talla VARCHAR(10),
+    PRIMARY KEY (id)
+)engine = innodb; 
+
 CREATE TABLE INSCRIPCION(
     id INT NOT NULL AUTO_INCREMENT,
-    talla_polera CHAR(5),
     estado_inscripcion BOOLEAN NOT NULL DEFAULT FALSE,
     foto_estudiante VARCHAR(1000),
     id_persona INT NOT NULL,
     id_UsuarioInscriptor INT NOT NULL,
+    id_tallaPolera INT,
     FOREIGN KEY (id_persona) REFERENCES PERSONA(id),
     FOREIGN KEY (id_UsuarioInscriptor) REFERENCES USUARIO(id),
+    FOREIGN KEY (id_tallaPolera) REFERENCES TALLAS_POLERA(id),
     PRIMARY KEY (id)
 )engine = innodb;
-
-
-DELIMITER //
-
 CREATE PROCEDURE MostrarDatosPersona(IN nro_registro VARCHAR(10))
 BEGIN
 SELECT * FROM PERSONA WHERE nro_registro = nro_registro;
 END //
-
-
 CREATE PROCEDURE VerificarExistenciaPersona(IN nro_registro VARCHAR(10), OUT existe BOOLEAN)
 BEGIN
 DECLARE contador INT;
@@ -51,7 +56,6 @@ SELECT COUNT(*) INTO contador FROM PERSONA WHERE nro_registro = nro_registro;
         SET existe = FALSE;
     END IF;
 END //
-
 CREATE PROCEDURE RegistrarInscripcion(
     IN nombreCompleto_IN VARCHAR(250),
     IN nroDeRegistro_IN VARCHAR(10),
@@ -59,12 +63,12 @@ CREATE PROCEDURE RegistrarInscripcion(
     IN facultad_IN VARCHAR(100),
     IN carnetDeIdentidad_IN VARCHAR(15),
     IN nroDeCelular_IN VARCHAR(20),
-    IN tallaPolera_IN CHAR(5),
+    IN cdg_tallaPolera_IN INT,
     IN urlFotoEstudiante_IN VARCHAR(1000),
+    IN correo_IN VARCHAR(255),
     IN id_UsuarioInscriptor_IN INT)
 
 BEGIN
-
 DECLARE existe BOOLEAN;
 DECLARE id_Persona INT;
 
@@ -74,15 +78,15 @@ CALL VerificarExistenciaPersona(nroDeRegistro_IN, @existe);
         -- Obtener codigo de persona
         SELECT id INTO id_Persona FROM PERSONA WHERE nro_registro = nro_registro;
         -- Registrar inscripcion
-        INSERT INTO INSCRIPCION(talla_polera,estado_inscripcion,foto_estudiante,id_persona,id_UsuarioInscriptor) values(tallaPolera_IN,TRUE,urlFotoEstudiante_IN,id_Persona,id_UsuarioInscriptor_IN);
-        UPDATE PERSONA SET carnet_identidad = carnetDeIdentidad_IN, nro_celular = nroDeCelular_IN WHERE nro_registro = nroDeRegistro_IN;
+        INSERT INTO INSCRIPCION(estado_inscripcion,foto_estudiante,id_Persona,id_UsuarioInscriptor,id_tallaPolera) values(TRUE,urlFotoEstudiante_IN,id_Persona,id_UsuarioInscriptor_IN,cdg_tallaPolera_IN);
+        UPDATE PERSONA SET carnet_identidad = carnetDeIdentidad_IN, nro_celular = nroDeCelular_IN, correo = correo_IN WHERE nro_registro = nroDeRegistro_IN;
 
     ELSE
         -- Inscripcion Manual
         -- Registrar persona
-        INSERT INTO PERSONA(nombreCompleto,nro_registro,carrera,facultad,carnet_identidad,nro_celular) values(nombreCompleto_IN,nroDeRegistro_IN,carrera_IN,facultad_IN,carnetDeIdentidad_IN,nroDeCelular_IN);
+        INSERT INTO PERSONA(nombreCompleto,nro_registro,carrera,facultad,carnet_identidad,nro_celular,correo) values(nombreCompleto_IN,nroDeRegistro_IN,carrera_IN,facultad_IN,carnetDeIdentidad_IN,nroDeCelular_IN,correo_IN);
         -- Obtener codigo de persona
-        INSERT INTO INSCRIPCION(talla_polera,estado_inscripcion,foto_estudiante,id_persona,id_UsuarioInscriptor) values(tallaPolera_IN,TRUE,urlFotoEstudiante_IN,LAST_INSERT_ID(),id_UsuarioInscriptor_IN);
+        INSERT INTO INSCRIPCION(estado_inscripcion,foto_estudiante,id_Persona,id_UsuarioInscriptor,id_tallaPolera) values(TRUE,urlFotoEstudiante_IN,LAST_INSERT_ID(),id_UsuarioInscriptor_IN,cdg_tallaPolera_IN);
     END IF;
 END //
 
@@ -105,15 +109,10 @@ BEGIN
     SET mensaje = 'Inscripción actualizada correctamente.';
 END //
 
-CREATE PROCEDURE VerificarLogin(IN nombre_usuario VARCHAR(50), IN contrasena VARCHAR(255), OUT mensaje VARCHAR(200))
+
+CREATE PROCEDURE ExtraerDatos_Del_Usuario(IN nombre_usuario VARCHAR(250))
 BEGIN
-DECLARE usuario_encontrado INT;
-SELECT COUNT(*) INTO usuario_encontrado FROM USUARIO WHERE nombre = nombre_usuario AND contraseña = contrasena;
-    IF usuario_encontrado = 1 THEN
-        SET mensaje = 'Usuario y contraseña correctos.';
-    ELSE
-        SET mensaje = 'Usuario o contraseña incorrectos.';
-    END IF;
+    SELECT * FROM USUARIO WHERE nombre = nombre_usuario;
 END //
 
 
@@ -135,7 +134,52 @@ BEGIN
     
 END //
 
+CREATE PROCEDURE verificar_Inscripcion(IN nroRegistro_IN VARCHAR(10), OUT mensaje VARCHAR(255))
+BEGIN
+    DECLARE contador INT;
+    SELECT COUNT(*) INTO contador FROM INSCRIPCION ins
+    INNER JOIN
+    PERSONA per ON ins.id_persona = per.id
+    WHERE per.nro_registro = nroRegistro_IN;
+    
+    IF contador > 0 THEN
+        SET mensaje = 'El estudiante ya está inscrito';
+    ELSE
+        SET mensaje = 'El estudiante no está inscrito';
+    END IF;
+END//
 
 
+CREATE PROCEDURE registrar_usuario(IN NombreDeUsuario_IN VARCHAR(150),IN contrasena_IN VARCHAR(255),IN NombreCompleto_IN VARCHAR(255), OUT mensaje VARCHAR(255))
+BEGIN
 
-DELIMITER ;
+    INSERT INTO USUARIO (nombre,contraseña,nombreCompleto,estado) VALUES (NombreDeUsuario_IN,contrasena_IN,NombreCompleto_IN,'Deshabilitado');
+    SET mensaje = 'Se ha registrado el usuario correctamente. Esperar aprobación del administrador.';
+
+
+END//
+
+CREATE PROCEDURE extraer_Datos_del_Usuario(IN nombre_usuario VARCHAR(50))
+BEGIN
+    SELECT * FROM USUARIO WHERE nombre = nombre_usuario;
+END//
+
+
+create view cant_por_tallas_polera_inscritas
+as
+SELECT
+    tpol.id As idTallaPolera,
+    tpol.talla As TallaPolera,
+    contarTallaPorInscripciones(tpol.id) As CantDeTallasIncritas
+    from tallas_polera tpol
+
+//
+
+
+CREATE FUNCTION contarTallaPorInscripciones(id_talla_IN INT)
+RETURNS INT
+BEGIN
+    DECLARE contador INT;
+    SELECT COUNT(*) INTO contador FROM INSCRIPCION WHERE id_tallaPolera = id_talla_IN AND estado_inscripcion = TRUE;
+    RETURN contador;
+END;

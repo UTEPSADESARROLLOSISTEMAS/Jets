@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 
 class principalModelo
 {
@@ -79,5 +81,7 @@ class principalModelo
         }
 
     }
+
+    
 
 }

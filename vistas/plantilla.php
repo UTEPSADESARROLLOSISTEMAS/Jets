@@ -29,7 +29,7 @@
                 
                 include "./vistas/inclusiones/Links_DeLibrerias.php";
                 require_once "./controladores/principal_controlador.php";
-                //principal_controlador::ValidarUsuario(); 
+                principal_controlador::ValidarUsuario(); 
 
 
             
